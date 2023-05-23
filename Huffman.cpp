@@ -1,8 +1,8 @@
 /* File: Huffman.cpp
  *
- * Name: Bradley Hu and Matthew Ayoob
+ * Name: Matthew Ayoob
  *
- * This file details the methods of Huffman Coding.
+ * This file details the methods of Huffman Coding and rigorous testing.
  */
 #include "Huffman.h"
 #include "GUI/SimpleTest.h"
@@ -264,17 +264,16 @@ string decompress(HuffmanResult& file) {
     return res;
 }
 
+/** Exhaustive Testing */
 
-/* * * * * * Test Cases Below This Point * * * * * */
-
-STUDENT_TEST("huffmanTreeFor handles repeated characters and the empty string") {
+TEST("huffmanTreeFor handles repeated characters and the empty string") {
     EXPECT_ERROR(huffmanTreeFor("AAAAAAAAAAAAAAAA"));
     EXPECT_ERROR(huffmanTreeFor("................"));
     EXPECT_ERROR(huffmanTreeFor("")); // No characters
 }
 
 
-STUDENT_TEST("Handles error for decompress") {
+TEST("Handles error for decompress") {
     HuffmanResult file = {
         { 0 },
         {'u'},
@@ -285,7 +284,7 @@ STUDENT_TEST("Handles error for decompress") {
 }
 
 
-STUDENT_TEST("encodeTree fully handles left path first") {
+TEST("encodeTree fully handles left path first") {
 
         EncodingTreeNode* tree = huffmanTreeFor("AB");
 
@@ -302,7 +301,7 @@ STUDENT_TEST("encodeTree fully handles left path first") {
         deleteTree(tree);
 }
 
-STUDENT_TEST("decodeTree properly places child") {
+TEST("decodeTree properly places child") {
     /* This tree:
      *                 *
      *                / \
@@ -326,7 +325,7 @@ STUDENT_TEST("decodeTree properly places child") {
 }
 
 
-STUDENT_TEST("encodeText accounts for improper trees") {
+TEST("encodeText accounts for improper trees") {
     /* This tree:
      *                 *
      *                / \
@@ -343,7 +342,7 @@ STUDENT_TEST("encodeText accounts for improper trees") {
         deleteTree(tree);
 }
 
-STUDENT_TEST("decodeText handles a misrepresented child") {
+TEST("decodeText handles a misrepresented child") {
     /* All possible characters. */
     string allChars = "";
 
@@ -367,7 +366,6 @@ STUDENT_TEST("decodeText handles a misrepresented child") {
     }
 }
 
-/* * * * * Provided Tests Below This Point * * * * */
 #include <limits>
 
 /* Utility function to test if a purported Huffman tree is indeed a Huffman tree.
@@ -436,13 +434,13 @@ EncodingTreeNode* strandTreeFor(const string& text, size_t index = 0) {
     };
 }
 
-PROVIDED_TEST("huffmanTreeFor reports errors on invalid inputs.") {
+TEST("huffmanTreeFor reports errors on invalid inputs.") {
     EXPECT_ERROR(huffmanTreeFor(""));    // No characters
     EXPECT_ERROR(huffmanTreeFor("a"));   // One character
     EXPECT_ERROR(huffmanTreeFor("aaa")); // One character
 }
 
-PROVIDED_TEST("huffmanTreeFor builds tree for two characters.") {
+TEST("huffmanTreeFor builds tree for two characters.") {
     EncodingTreeNode* reference = new EncodingTreeNode {
         ' ', new EncodingTreeNode {'a', nullptr, nullptr}, new EncodingTreeNode {'b', nullptr, nullptr}
     };
@@ -455,7 +453,7 @@ PROVIDED_TEST("huffmanTreeFor builds tree for two characters.") {
     deleteTree(tree);
 }
 
-PROVIDED_TEST("huffmanTreeFor works on the full range of characters.") {
+TEST("huffmanTreeFor works on the full range of characters.") {
     /* Get a string of all possible characters, then pair them off and see what we find. */
     string allChars = pangrammaticString();
     for (size_t i = 0; i < allChars.size(); i += 2) {
@@ -481,7 +479,7 @@ PROVIDED_TEST("huffmanTreeFor works on the full range of characters.") {
 
 
 
-PROVIDED_TEST("huffmanTreeFor uses cumulative weights (v1).") {
+TEST("huffmanTreeFor uses cumulative weights (v1).") {
     /* This tree:
      *                 *
      *                / \
@@ -512,7 +510,7 @@ PROVIDED_TEST("huffmanTreeFor uses cumulative weights (v1).") {
     deleteTree(tree);
 }
 
-PROVIDED_TEST("huffmanTreeFor uses cumulative weights (v2).") {
+TEST("huffmanTreeFor uses cumulative weights (v2).") {
     /*
      *          *
      *       /     \
@@ -556,7 +554,7 @@ PROVIDED_TEST("huffmanTreeFor uses cumulative weights (v2).") {
     deleteTree(tree);
 }
 
-PROVIDED_TEST("decodeText works on small sample.") {
+TEST("decodeText works on small sample.") {
     /* This tree:
      *                 *
      *                / \
@@ -586,7 +584,7 @@ PROVIDED_TEST("decodeText works on small sample.") {
     deleteTree(tree);
 }
 
-PROVIDED_TEST("Can decode all char values.") {
+TEST("Can decode all char values.") {
     /* All possible characters. */
     string allChars = pangrammaticString();
 
