@@ -1,0 +1,29 @@
+KL Divergence is a super interesting and highly efficient method of data compression.
+The idea involves representing information as a distribution rather than individual data
+. An example of how this might work is that rather than sending information about each
+individual letter in our MONSOON example, we can create probability distribution where
+the x-axis is the number of M’s, O’s, N’s, and S’s, while the y-axis is the probability
+of seeing each of the respective letters x times. In this way, we have condensed the data
+into a much more compact distribution. However, with KL divergence, another problem lies
+in how to choose the best distribution to represent the data. As there are tons of distributions
+that could be represented (normal, binomial, uniforms, etc.), the intuition of  KL divergence
+is the key to choosing the best one. To do this, we look at the complex KL divergence equation as shown below:
+
+𝐷KL(𝑃‖𝑄)=∑𝑖𝑃(𝑖)log(𝑃(𝑖)/𝑄(𝑖))
+
+(Here is a Python implementation of its calculation that I found as well):
+import numpy as np
+import math from math
+import log
+
+np.sum(np.where(p != 0,(p) * np.log10(p / q), 0))
+
+We can analyze how far a given arbitrary distribution
+is away from the true distribution. If the two distributions match perfectly,
+this value will take on zero, otherwise a value between 0 and infinity.
+The lower the KL divergence value, the better the distribution match.
+Once we have quantitatively calculated this for each of the known distributions,
+we can make the best judgement about what distribution to use. At this point,
+we can just send the parameter of that probability distribution rather than
+the true statistic, saving us a significant amount of memory.
+
