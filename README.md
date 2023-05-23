@@ -1,1 +1,8 @@
-Your final assignment of the quarter is to write a program that uses Huffman coding to compress and decompress files. It pulls together ideas from all over the quarter – recursive exploration, linked structures, trees, and streaming algorithms. Once you’ve finished coding this one up, you’ll have a fairly impressive piece of software that’s powered by a bunch of clever algorithms. We hope this is a fitting capstone to your experience in CS106B!
+This program uses Huffman coding to compress and decompress files. It pulls together a plethora of coding fundamentals: recursive exploration, linked structures, trees, and streaming algorithms. In the end, this project created a fairly impressive piece of software that’s powered by a bunch of clever algorithms. This secured programming abstractions fundamentals 
+
+It was developed incrementally
+(1) Building the Huffman Tree
+(2) Implementing Text Encoding and Decoding
+(3) Implementing Tree Encoding and Decoding
+(4) Integrate All Above Parts
+(5) Rigorous Unit, Integration & Scalability Testing
